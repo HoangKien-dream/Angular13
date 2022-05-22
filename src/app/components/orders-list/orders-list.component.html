@@ -1,0 +1,64 @@
+<div style="margin-bottom: 20px">
+  <div class="ant-row">
+    <div class="ant-col-6"><input nz-input placeholder="Name Product ..." [(ngModel)]="keyword"/></div>
+    <div style="margin: 0 10px" class="ant-col-8"><input nz-input placeholder="Phone....." [(ngModel)]="userPhone"/></div>
+    <div class="ant-col-6"><input nz-input placeholder="Name User ....." [(ngModel)]="userName"/></div>
+  <div class="ant-col-6" style="margin-top: 10px">
+    <nz-range-picker  [nzFormat]="dateFormat" [(ngModel)]="startDate"></nz-range-picker>
+  </div>
+    <div class="ant-col-6" style="margin: 10px 20px 0">
+      <button class="ant-btn ant-btn-primary" (click)="search()">Search</button>
+    </div>
+  </div>
+</div>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">User</th>
+    <th scope="col">Phone</th>
+    <th scope="col">TotalPrice</th>
+    <th scope="col">CreatedAt</th>
+    <th scope="col">Detail</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of orders">
+    <th scope="row">{{data.id}}</th>
+    <td>{{data.user.firstName}} {{data.user.lastName}}</td>
+    <td>{{data.user.phone}}</td>
+    <td format2>{{data.totalPrice | currency:'VND'}}</td>
+    <td>{{data.createdAt}}</td>
+    <td>
+      <button nz-button (click)="showModal(data.orderDetails)"><span>Show Modal</span></button>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ProductName</th>
+              <th scope="col">Thumbnail</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let orderDetail of orderDetails">
+              <th scope="row">{{orderDetail.product.id}}</th>
+              <td id="price">{{orderDetail.product.name}}</td>
+              <td><img class="img img-thumbnail" src="{{orderDetail.product.thumbnail}}" alt=""></td>
+              <td>{{orderDetail.quantity}}</td>
+              <td>{{orderDetail.unitPrice | currency:'VND'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </nz-modal>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<nz-pagination [nzPageIndex]="page" (nzPageIndexChange)="handlePageChange($event)" [nzPageSize]="size"
+               [nzTotal]="total"></nz-pagination>
+
