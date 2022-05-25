@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Order} from "../../models/order.model";
 import {OrderService} from "../../services/order.service";
+import {format,formatISO} from 'date-fns'
 import {Product} from "../../models/product.model";
-import {OrderDetail} from "../../models/order-detail.model";
+
 @Component({
   selector: 'app-orders-list',
   templateUrl: './orders-list.component.html',
@@ -10,18 +11,21 @@ import {OrderDetail} from "../../models/order-detail.model";
 })
 export class OrdersListComponent implements OnInit {
   orders?: Order[];
-  orderDetails ?:any;
+  orderDetails ?: any;
   isVisible = false;
-  page=1;
-  size=4;
-  total?:number;
-  keyword=""
-  userName=""
-  userPhone="";
-  dateFormat='yyyy/MM/dd';
-  startDate: any;
+  page = 1;
+  size = 4;
+  total?: number;
+  keyword = "";
+  userName = "";
+  userPhone = "";
+  date: any = [];
+  startDate = "";
+  enDate = "";
+  dateFormat = 'yyyy-MM-dd';
+ totalPrice = 0;
 
-  constructor(private  orderService: OrderService) {
+  constructor(private orderService: OrderService) {
   }
 
   ngOnInit(): void {
@@ -29,11 +33,17 @@ export class OrdersListComponent implements OnInit {
   }
 
   getAll(): void {
-    this.orderService.getAll(this.page,this.size,this.keyword,this.userName,this.userPhone)
+    this.orderService.getAll(this.page, this.size, this.keyword, this.userName, this.userPhone, this.startDate, this.enDate)
       .subscribe({
         next: (data) => {
           this.orders = data.content;
-          this.page = data.pageable.pageNumber+1;
+          let price = 0;
+          for (const order of data.content) {
+            price+= order.totalPrice;
+          }
+          this.totalPrice = price;
+          console.log(this.totalPrice)
+          this.page = data.pageable.pageNumber + 1;
           this.total = data.totalElements;
           console.log(this.orders);
         },
@@ -41,7 +51,7 @@ export class OrdersListComponent implements OnInit {
       });
   }
 
-  showModal(event?:any): void {
+  showModal(event?: any): void {
     this.orderDetails = event;
     console.log(this.orderDetails)
     this.isVisible = true;
@@ -57,13 +67,29 @@ export class OrdersListComponent implements OnInit {
     this.isVisible = false;
   }
 
-  handlePageChange(event:number) {
+  handlePageChange(event: number) {
     this.page = event;
     this.getAll()
   }
 
   search() {
-    console.log(this.startDate)
+    console.log(this.date);
+    if (this.date.length>0 && this.date != null) {
+      this.startDate = format(this.date[0], 'yyyy-MM-dd')
+      this.enDate = format(this.date[1], 'yyyy-MM-dd')
+      console.log(this.startDate);
+      console.log(this.enDate);
+    }
     this.getAll()
+  }
+
+  refresh() {
+    this.keyword = '';
+    this.date = '';
+    this.startDate = '';
+    this.enDate = '';
+    this.userName = '';
+    this.userPhone = '';
+    this.getAll();
   }
 }
