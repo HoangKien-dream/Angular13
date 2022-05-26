@@ -9,6 +9,6 @@ const baseUrl = 'http://localhost:8080/api/v1/product';
 export class ProductService {
   constructor(private http:HttpClient) { }
   getAll(page?:number,size?:number):Observable<any> {
-    return this.http.get(`${baseUrl}?page=${page}&size=${size}`)
+    return this.http.get(`${baseUrl}?page=${page}&size=${size}`,{ withCredentials: false })
   }
 }

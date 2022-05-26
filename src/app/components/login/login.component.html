@@ -1,0 +1,27 @@
+<div>
+  <div class="submit-form">
+      <div class="form-group">
+        <label for="title">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          required
+          [(ngModel)]="username"
+          name="title"
+        />
+      <div class="form-group">
+        <label for="description">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="description"
+          required
+          [(ngModel)]="password"
+          name="description"
+        />
+      </div>
+      <button  (click)="login('success')" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+</div>
