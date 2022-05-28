@@ -65,5 +65,6 @@ export class OrdersListComponent implements OnInit {
   search() {
     console.log(this.startDate)
     this.getAll()
+
   }
 }
