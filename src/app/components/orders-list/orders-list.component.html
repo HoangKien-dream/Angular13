@@ -4,10 +4,14 @@
     <div style="margin: 0 10px" class="ant-col-8"><input nz-input placeholder="Phone....." [(ngModel)]="userPhone"/></div>
     <div class="ant-col-6"><input nz-input placeholder="Name User ....." [(ngModel)]="userName"/></div>
   <div class="ant-col-6" style="margin-top: 10px">
-    <nz-range-picker  [nzFormat]="dateFormat" [(ngModel)]="startDate"></nz-range-picker>
+    <nz-range-picker  [nzFormat]="dateFormat"
+                   	[(ngModel)]="date"
+                      [nzDateRender]=""
+                      ></nz-range-picker>
   </div>
     <div class="ant-col-6" style="margin: 10px 20px 0">
       <button class="ant-btn ant-btn-primary" (click)="search()">Search</button>
+      <button style="margin: 0 10px" class="ant-btn ant-btn-primary" (click)="refresh()">Refresh</button>
     </div>
   </div>
 </div>
@@ -27,7 +31,7 @@
     <th scope="row">{{data.id}}</th>
     <td>{{data.user.firstName}} {{data.user.lastName}}</td>
     <td>{{data.user.phone}}</td>
-    <td format2>{{data.totalPrice | currency:'VND'}}</td>
+    <td >{{data.totalPrice| currency:'VND'}}</td>
     <td>{{data.createdAt}}</td>
     <td>
       <button nz-button (click)="showModal(data.orderDetails)"><span>Show Modal</span></button>
@@ -58,6 +62,10 @@
     </td>
   </tr>
   </tbody>
+  <tr>
+    <th>Tổng đơn hàng</th>
+    <th>{{totalPrice | currency:'VND'}}</th>
+  </tr>
 </table>
 <nz-pagination [nzPageIndex]="page" (nzPageIndexChange)="handlePageChange($event)" [nzPageSize]="size"
                [nzTotal]="total"></nz-pagination>
