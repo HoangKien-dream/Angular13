@@ -22,6 +22,7 @@ import { LoginComponent } from './components/login/login.component';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {TokenInterceptorService} from "../_help/http.interceptor";
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { ListAccountComponent } from './components/list-account/list-account.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -29,7 +30,8 @@ registerLocaleData(en);
     AppComponent,
     OrdersListComponent,
     ProductListComponent,
-    LoginComponent
+    LoginComponent,
+    ListAccountComponent
   ],
   imports: [
     BrowserModule,

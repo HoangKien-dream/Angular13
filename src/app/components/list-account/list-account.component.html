@@ -1,0 +1,39 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">
+      <input (click)="checkAll()" type="checkbox">
+    </th>
+    <th scope="col">#</th>
+    <th scope="col">UserName</th>
+    <th scope="col">Roles</th>
+    <th scope="col">
+      <select  class="form-select " [(ngModel)]="status" (change)="updateStatus()" aria-label=".form-select-sm example" >
+        <option  [ngValue]="5">Status</option>
+        <option  [ngValue]="1">Active</option>
+        <option  [ngValue]="0">InActive</option>
+        <option [ngValue]="-1">Delete</option>
+      </select>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let account of accounts">
+    <th>
+      <input name="accountCheck" type="checkbox">
+    </th>
+    <th scope="row">{{account.id}}</th>
+    <td>{{account.username}}</td>
+    <td>
+      <div  *ngFor="let role of account.roles">
+        {{role.name}}
+      </div>
+    </td>
+    <td [ngSwitch]="account.status">
+      <div *ngSwitchCase="1">Active</div>
+      <div *ngSwitchCase="-1">Delete</div>
+      <div *ngSwitchCase="0">InActive</div>
+    </td>
+  </tr>
+  </tbody>
+</table>
