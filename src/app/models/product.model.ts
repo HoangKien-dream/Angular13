@@ -5,4 +5,5 @@ export class Product {
   thumbnail?:string;
   description?:string;
   category?:any;
+  status?:number;
 }
