@@ -2,7 +2,13 @@
   <thead>
   <tr>
     <th scope="col">
-      <input (click)="checkAll()" type="checkbox">
+      <label
+        nz-checkbox
+        [(ngModel)]="checkMaster"
+        (ngModelChange)="checkAll()"
+        [nzIndeterminate]="indeterminate"
+      >
+      </label>
     </th>
     <th scope="col">#</th>
     <th scope="col">UserName</th>
@@ -20,13 +26,13 @@
   <tbody>
   <tr *ngFor="let account of accounts">
     <th>
-      <input name="accountCheck" type="checkbox">
+      <input [(ngModel)]="checkedElement"  (change)="check(account.id)" value="{{account.id}}" type="checkbox">
     </th>
     <th scope="row">{{account.id}}</th>
     <td>{{account.username}}</td>
     <td>
       <div  *ngFor="let role of account.roles">
-        {{role.name}}
+       <button style="margin-top: 5px" class="btn btn-outline-info">{{role.name}} <i class="fa-solid fa-trash"></i></button>
       </div>
     </td>
     <td [ngSwitch]="account.status">

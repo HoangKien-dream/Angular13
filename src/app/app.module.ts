@@ -23,6 +23,7 @@ import {NzFormModule} from "ng-zorro-antd/form";
 import {TokenInterceptorService} from "../_help/http.interceptor";
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { ListAccountComponent } from './components/list-account/list-account.component';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 registerLocaleData(en);
 
 @NgModule({
@@ -47,7 +48,8 @@ registerLocaleData(en);
     NzAvatarModule,
     NzCardModule,
     NzFormModule,
-    NzMessageModule
+    NzMessageModule,
+    NzCheckboxModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US },{
     provide: HTTP_INTERCEPTORS,

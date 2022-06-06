@@ -18,6 +18,9 @@ export class AuthService {
   getAll():Observable<any>{
     return this.http.get(getAccount,httpOptions)
   }
+  updatedStatus(id:any,status:any):Observable<any>{
+    return this.http.put(`${getAccount}?id=${id}&status=${status}`,httpOptions)
+  }
   addRole(username:string,role:string):Observable<any>{
     return this.http.put(`${getRole}?username=${username}&role=${role}`,httpOptions);
   }
