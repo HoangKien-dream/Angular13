@@ -1,16 +1,104 @@
-<div class="ant-table-container">
-  <div class="ant-row">
-    <div *ngFor="let product of products" style="margin: 0 30px" class="ant-col-6">
-      <nz-card style="width:300px;" [nzCover]="coverTemplate" >
-        <nz-card-meta
-          nzTitle="{{product.name}}"
-        ></nz-card-meta>
-      </nz-card>
-      <ng-template #coverTemplate>
-        <img alt="example" src="{{product.thumbnail}}"/>
-      </ng-template>
+<!--<div class="ant-table-container">-->
+<!--  <div class="ant-row">-->
+<!--    <div *ngFor="let product of products" style="margin: 0 30px" class="ant-col-6">-->
+<!--      <nz-card style="width:300px;" [nzCover]="coverTemplate" >-->
+<!--        <nz-card-meta-->
+<!--          nzTitle="{{product.name}}"-->
+<!--        ></nz-card-meta>-->
+<!--      </nz-card>-->
+<!--      <ng-template #coverTemplate>-->
+<!--        <img alt="example" src="{{product.thumbnail}}"/>-->
+<!--      </ng-template>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<nz-pagination [nzPageIndex]="page" (nzPageIndexChange)="handlePageChange($event)" [nzPageSize]="size"-->
+<!--               [nzTotal]="total"></nz-pagination>-->
+<div class="container-fluid p-0">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="white_card card_height_100 mb_30">
+        <div class="white_card_header">
+          <div class="box_header m-0">
+            <div class="main-title">
+              <h3 class="m-0">Data table</h3>
+            </div>
+          </div>
+        </div>
+        <div class="white_card_body">
+          <div class="QA_section">
+            <div class="white_box_tittle list_header">
+              <h4>Table</h4>
+              <div class="box_right d-flex lms_block">
+                <div class="serach_field_2">
+                  <div class="search_inner">
+                    <form active="#">
+                      <div class="search_field">
+                        <input type="text" placeholder="Search content here...">
+                      </div>
+                      <button type="submit"><i class="ti-search"></i></button>
+                    </form>
+                  </div>
+                </div>
+                <div class="add_button ms-2">
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#addcategory" class="btn_1">Add New</a>
+                </div>
+              </div>
+            </div>
+            <div class="QA_table mb_30">
+
+              <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
+                <table class="table lms_table_active dataTable no-footer dtr-inline" id="DataTables_Table_0" role="grid"
+                       aria-describedby="DataTables_Table_0_info" style="width: 1525px;">
+                  <thead>
+                  <tr role="row">
+                    <th scope="col" class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                        colspan="1" style="width: 169px;" aria-sort="ascending"
+                        aria-label="title: activate to sort column descending">#
+                    </th>
+                    <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                        colspan="1" style="width: 238px;" aria-label="Category: activate to sort column ascending">
+                      Name
+                    </th>
+                    <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                        colspan="1" style="width: 228px;" aria-label="Teacher: activate to sort column ascending">
+                      Thumbnail
+                    </th>
+                    <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                        colspan="1" style="width: 224px;" aria-label="Lesson: activate to sort column ascending">Description
+                    </th>
+
+                    <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                        colspan="1" style="width: 130px;" aria-label="Price: activate to sort column ascending">Price
+                    </th>
+                    <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                        colspan="1" style="width: 183px;" aria-label="Status: activate to sort column ascending">Status
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let product of products" role="row" class="odd">
+                    <th scope="row" tabindex="0" class="sorting_1">{{product.id}}</th>
+                    <td>{{product.name}}</td>
+                    <td><img src="{{product.thumbnail}}" class="img-thumbnail card-img" alt=""></td>
+                    <td>{{product.description}}</td>
+                    <td>{{product.price | currency:"VND"}}</td>
+                    <td ngSwitch="{{product.status}}">
+                      <div *ngSwitchCase="1">Available</div>
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+                <nz-pagination style="text-align: center; margin-top: 20px" [nzPageIndex]="page" (nzPageIndexChange)="handlePageChange($event)" [nzPageSize]="size"
+                               [nzTotal]="total"></nz-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
     </div>
   </div>
 </div>
-<nz-pagination [nzPageIndex]="page" (nzPageIndexChange)="handlePageChange($event)" [nzPageSize]="size"
-               [nzTotal]="total"></nz-pagination>

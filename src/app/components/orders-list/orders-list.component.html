@@ -1,72 +1,207 @@
-<div style="margin-bottom: 20px">
-  <div class="ant-row">
-    <div class="ant-col-6"><input nz-input placeholder="Name Product ..." [(ngModel)]="keyword"/></div>
-    <div style="margin: 0 10px" class="ant-col-8"><input nz-input placeholder="Phone....." [(ngModel)]="userPhone"/></div>
-    <div class="ant-col-6"><input nz-input placeholder="Name User ....." [(ngModel)]="userName"/></div>
-  <div class="ant-col-6" style="margin-top: 10px">
-    <nz-range-picker  [nzFormat]="dateFormat"
-                   	[(ngModel)]="date"
-                      [nzDateRender]=""
-                      ></nz-range-picker>
+<!--<div style="margin-bottom: 20px">-->
+<!--  <div class="ant-row">-->
+<!--    <div class="ant-col-6"><input nz-input placeholder="Name Product ..." [(ngModel)]="keyword"/></div>-->
+<!--    <div style="margin: 0 10px" class="ant-col-8"><input nz-input placeholder="Phone....." [(ngModel)]="userPhone"/></div>-->
+<!--    <div class="ant-col-6"><input nz-input placeholder="Name User ....." [(ngModel)]="userName"/></div>-->
+<!--  <div class="ant-col-6" style="margin-top: 10px">-->
+<!--    <nz-range-picker  [nzFormat]="dateFormat"-->
+<!--                   	[(ngModel)]="date"-->
+<!--                      [nzDateRender]=""-->
+<!--                      ></nz-range-picker>-->
+<!--  </div>-->
+<!--    <div class="ant-col-6" style="margin: 10px 20px 0">-->
+<!--      <button class="ant-btn ant-btn-primary" (click)="search()">Search</button>-->
+<!--      <button style="margin: 0 10px" class="ant-btn ant-btn-primary" (click)="refresh()">Refresh</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<table class="table table-bordered">-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th scope="col">#</th>-->
+<!--    <th scope="col">User</th>-->
+<!--    <th scope="col">Phone</th>-->
+<!--    <th scope="col">TotalPrice</th>-->
+<!--    <th scope="col">CreatedAt</th>-->
+<!--    <th scope="col">Detail</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr *ngFor="let data of orders">-->
+<!--    <th scope="row">{{data.id}}</th>-->
+<!--    <td>{{data.user.firstName}} {{data.user.lastName}}</td>-->
+<!--    <td>{{data.user.phone}}</td>-->
+<!--    <td >{{data.totalPrice| currency:'VND'}}</td>-->
+<!--    <td>{{data.createdAt}}</td>-->
+<!--    <td>-->
+<!--      <button nz-button (click)="showModal(data.orderDetails)"><span>Show Modal</span></button>-->
+<!--      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">-->
+<!--        <ng-container *nzModalContent>-->
+<!--          <table class="table table-bordered">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--              <th scope="col">#</th>-->
+<!--              <th scope="col">ProductName</th>-->
+<!--              <th scope="col">Thumbnail</th>-->
+<!--              <th scope="col">Quantity</th>-->
+<!--              <th scope="col">Price</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr *ngFor="let orderDetail of orderDetails">-->
+<!--              <th scope="row">{{orderDetail.product.id}}</th>-->
+<!--              <td id="price">{{orderDetail.product.name}}</td>-->
+<!--              <td><img class="img img-thumbnail" src="{{orderDetail.product.thumbnail}}" alt=""></td>-->
+<!--              <td>{{orderDetail.quantity}}</td>-->
+<!--              <td>{{orderDetail.unitPrice | currency:'VND'}}</td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--          </table>-->
+<!--        </ng-container>-->
+<!--      </nz-modal>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--  <tr>-->
+<!--    <th>Tổng đơn hàng</th>-->
+<!--    <th>{{totalPrice | currency:'VND'}}</th>-->
+<!--  </tr>-->
+<!--</table>-->
+<!--<nz-pagination [nzPageIndex]="page" (nzPageIndexChange)="handlePageChange($event)" [nzPageSize]="size"-->
+<!--               [nzTotal]="total"></nz-pagination>-->
+<div class="main_content_iner overly_inner">
+  <div class="container-fluid p-0 ">
+    <div class="row">
+      <div class="col-12">
+        <div class="page_title_box d-flex align-items-center justify-content-between">
+          <div class="page_title_left">
+            <h3 class="f_s_30 f_w_700 text_white">Dashboard</h3>
+            <ol class="breadcrumb page_bradcam mb-0">
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Salessa </a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+              <li class="breadcrumb-item active">Sales</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-    <div class="ant-col-6" style="margin: 10px 20px 0">
-      <button class="ant-btn ant-btn-primary" (click)="search()">Search</button>
-      <button style="margin: 0 10px" class="ant-btn ant-btn-primary" (click)="refresh()">Refresh</button>
+  <div class="container-fluid p-0">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="white_card card_height_100 mb_30">
+          <div class="white_card_header">
+            <div class="box_header m-0">
+              <div class="main-title">
+                <h3 class="m-0">Data table</h3>
+              </div>
+            </div>
+          </div>
+          <div class="white_card_body">
+            <div class="QA_section">
+              <div class="white_box_tittle">
+                <h4>Table</h4>
+                <div style="margin-bottom: 20px">
+                  <div class="ant-row">
+                    <div class="ant-col-6"><input nz-input placeholder="Name Product ..." [(ngModel)]="keyword"/></div>
+                    <div style="margin: 0 10px" class="ant-col-6"><input nz-input placeholder="Phone....." [(ngModel)]="userPhone"/></div>
+                    <div class="ant-col-6" style="margin-bottom: 10px;">
+                      <button class="ant-btn ant-btn-primary" (click)="search()">Search</button>
+                      <button class="ant-btn ant-btn-primary" (click)="refresh()">Refresh</button>
+                    </div>
+                    <div class="ant-col-6"><input nz-input placeholder="Name User ....." [(ngModel)]="userName"/></div>
+                    <div class="ant-col-6" style="margin-left: 10px">
+                      <nz-range-picker  [nzFormat]="dateFormat"
+                                        [(ngModel)]="date"
+                                        [nzDateRender]=""
+                      ></nz-range-picker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="QA_table mb_30">
+
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
+                  <table class="table lms_table_active dataTable no-footer dtr-inline" id="DataTables_Table_0" role="grid"
+                         aria-describedby="DataTables_Table_0_info" style="width: 1525px;">
+                    <thead>
+                    <tr role="row">
+                      <th scope="col" class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                          colspan="1" style="width: 169px;" aria-sort="ascending"
+                          aria-label="title: activate to sort column descending">#
+                      </th>
+                      <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                          colspan="1" style="width: 238px;" aria-label="Category: activate to sort column ascending">
+                        User
+                      </th>
+                      <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                          colspan="1" style="width: 228px;" aria-label="Teacher: activate to sort column ascending">
+                        Phone
+                      </th>
+                      <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                          colspan="1" style="width: 224px;" aria-label="Lesson: activate to sort column ascending">
+                        ToTalPrice
+                      </th>
+                      <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                          colspan="1" style="width: 143px;" aria-label="Enrolled: activate to sort column ascending">
+                        CreatedAt
+                      </th>
+                      <th scope="col" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
+                          colspan="1" style="width: 130px;" aria-label="Price: activate to sort column ascending">Detail
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr role="row" *ngFor="let data of orders" class="odd">
+                      <th scope="row" tabindex="0" class="sorting_1"> {{data.id}}
+                      </th>
+                      <td>{{data.user.firstName}} {{data.user.lastName}}</td>
+                      <td>{{data.user.phone}}</td>
+                      <td>{{data.totalPrice| currency:'VND'}}</td>
+                      <td>{{data.createdAt}}</td>
+                      <td>
+                        <button nz-button (click)="showModal(data.orderDetails)"><span>Show Modal</span></button>
+                        <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()"
+                                  (nzOnOk)="handleOk()">
+                          <ng-container *nzModalContent>
+                            <table class="table table-bordered">
+                              <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ProductName</th>
+                                <th scope="col">Thumbnail</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let orderDetail of orderDetails">
+                                <th scope="row">{{orderDetail.product.id}}</th>
+                                <td id="price">{{orderDetail.product.name}}</td>
+                                <td><img class="img img-thumbnail" src="{{orderDetail.product.thumbnail}}" alt=""></td>
+                                <td>{{orderDetail.quantity}}</td>
+                                <td>{{orderDetail.unitPrice | currency:'VND'}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </ng-container>
+                        </nz-modal>
+                      </td>
+                    </tr>
+                  </table>
+                  <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite"><h3 ><span class="badge bg-danger bg-secondary">Tổng số tiền: {{totalPrice | currency:'VND'}}</span></h3></div>
+                  <div style="text-align: center; margin-top: 20px" id="DataTables_Table_0_paginate">
+                    <nz-pagination  [nzPageIndex]="page" (nzPageIndexChange)="handlePageChange($event)" [nzPageSize]="size"
+                                    [nzTotal]="total"></nz-pagination>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+      </div>
     </div>
   </div>
 </div>
-<table class="table table-bordered">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">User</th>
-    <th scope="col">Phone</th>
-    <th scope="col">TotalPrice</th>
-    <th scope="col">CreatedAt</th>
-    <th scope="col">Detail</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of orders">
-    <th scope="row">{{data.id}}</th>
-    <td>{{data.user.firstName}} {{data.user.lastName}}</td>
-    <td>{{data.user.phone}}</td>
-    <td >{{data.totalPrice| currency:'VND'}}</td>
-    <td>{{data.createdAt}}</td>
-    <td>
-      <button nz-button (click)="showModal(data.orderDetails)"><span>Show Modal</span></button>
-      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-        <ng-container *nzModalContent>
-          <table class="table table-bordered">
-            <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">ProductName</th>
-              <th scope="col">Thumbnail</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let orderDetail of orderDetails">
-              <th scope="row">{{orderDetail.product.id}}</th>
-              <td id="price">{{orderDetail.product.name}}</td>
-              <td><img class="img img-thumbnail" src="{{orderDetail.product.thumbnail}}" alt=""></td>
-              <td>{{orderDetail.quantity}}</td>
-              <td>{{orderDetail.unitPrice | currency:'VND'}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </ng-container>
-      </nz-modal>
-    </td>
-  </tr>
-  </tbody>
-  <tr>
-    <th>Tổng đơn hàng</th>
-    <th>{{totalPrice | currency:'VND'}}</th>
-  </tr>
-</table>
-<nz-pagination [nzPageIndex]="page" (nzPageIndexChange)="handlePageChange($event)" [nzPageSize]="size"
-               [nzTotal]="total"></nz-pagination>
-

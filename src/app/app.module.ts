@@ -24,6 +24,8 @@ import {TokenInterceptorService} from "../_help/http.interceptor";
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { ListAccountComponent } from './components/list-account/list-account.component';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { ProductComponent } from './components/product/product.component';
+import { CartComponent } from './components/cart/cart.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -32,7 +34,9 @@ registerLocaleData(en);
     OrdersListComponent,
     ProductListComponent,
     LoginComponent,
-    ListAccountComponent
+    ListAccountComponent,
+    ProductComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
